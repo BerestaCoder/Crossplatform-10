@@ -1,6 +1,6 @@
 import 'package:crossplatform10/screens/list/list_screen.dart';
 import 'package:crossplatform10/screens/home_screen.dart';
-import 'package:crossplatform10/tools/bloc/app_block_observer.dart';
+import 'package:crossplatform10/tools/app_block_observer.dart';
 import 'package:crossplatform10/tools/user.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
