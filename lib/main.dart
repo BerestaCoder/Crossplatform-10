@@ -1,5 +1,5 @@
-import 'package:crossplatform10/screens/list/list_screen.dart';
 import 'package:crossplatform10/screens/home_screen.dart';
+import 'package:crossplatform10/screens/save/save_screen.dart';
 import 'package:crossplatform10/tools/app_block_observer.dart';
 import 'package:crossplatform10/tools/user.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +39,9 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'list_screen',
+          path: 'save_screen',
           builder: (BuildContext context, GoRouterState state) {
-            return const ListScreen();
+            return const SaveScreen();
           },
         ),
       ],

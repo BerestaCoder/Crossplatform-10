@@ -1,9 +1,8 @@
 import 'package:crossplatform10/screens/basket/basket_screen.dart';
-import 'package:crossplatform10/screens/left_right/left_image_screen.dart';
+import 'package:crossplatform10/screens/list/column_screen.dart';
 import 'package:crossplatform10/screens/pizza/pizza_screen.dart';
 import 'package:crossplatform10/tools/save.dart';
 import 'package:crossplatform10/screens/profile/profile_screen.dart';
-import 'package:crossplatform10/screens/save/save_screen.dart';
 import 'package:crossplatform10/tools/platform_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -65,6 +64,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         )
                     ),
+                    // =========== Списки
+                    ElevatedButton(
+                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ColumnScreen())),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.list),
+                            Text("Разные списки"),
+                          ],
+                        )
+                    ),
                     // =========== Пицца
                     ElevatedButton(
                         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const PizzaScreen())),
@@ -77,31 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     // =========== Сохранения
                     ElevatedButton(
-                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SaveScreen())),
+                        onPressed: () => context.go('/save_screen'),
                         child: const Row(
                           children: [
                             Icon(Icons.save),
                             Text("Сохранение"),
-                          ],
-                        )
-                    ),
-                    // =========== Сохранения
-                    ElevatedButton(
-                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const LeftImageScreen())),
-                        child: const Row(
-                          children: [
-                            Icon(Icons.image),
-                            Text("Картинки"),
-                          ],
-                        )
-                    ),
-                    // =========== Списки
-                    ElevatedButton(
-                        onPressed: () => context.go('/list_screen'),
-                        child: const Row(
-                          children: [
-                            Icon(Icons.list),
-                            Text("Разные списки"),
                           ],
                         )
                     ),

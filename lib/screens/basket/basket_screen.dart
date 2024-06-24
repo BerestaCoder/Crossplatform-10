@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BasketScreen extends StatefulWidget {
   const BasketScreen({super.key});
@@ -8,41 +7,46 @@ class BasketScreen extends StatefulWidget {
   State<BasketScreen> createState() => _BasketScreenState();
 }
 
-enum MyItem{
-  pizza, cake, tea
-}
-
 class _BasketScreenState extends State<BasketScreen> {
-  MyItem chosenItem = MyItem.pizza;
-  int _pizzza_counter = 0;
-  int _cake_counter = 0;
-  int _tea_counter = 0;
+  int _itemIndex = 0; // Пицца, Торт, Суп, Чай, Морс
+  int _pizza = 0;
+  int _cake = 0;
+  int _soup = 0;
+  int _tea = 0;
+  int _cookie = 0;
+
   String _text = 'Пицца — традиционное итальянское блюдо, изначально в виде круглой дрожжевой лепёшки, выпекаемой с уложенной сверху начинкой из томатного соуса, сыра и зачастую других ингредиентов, таких как мясо, овощи, грибы и прочие продукты';
   String _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/pizza.png';
 
   void _incrementItem() {
     setState(() {
-      switch (chosenItem){
-        case MyItem.pizza:
-          _pizzza_counter++;
-          context.read<PizzaBloc>().add(PizzaIncrementPressed());
-        case MyItem.cake:
-          _cake_counter++;
-        case MyItem.tea:
-          _tea_counter++;
+      switch(_itemIndex){
+        case 0:
+          _pizza++;
+        case 1:
+          _cake++;
+        case 2:
+          _soup++;
+        case 3:
+          _tea++;
+        default:
+          _cookie++;
       }
     });
   }
   void _decrementItem() {
     setState(() {
-      switch (chosenItem){
-        case MyItem.pizza:
-          if (_pizzza_counter>0) _pizzza_counter--;
-          context.read<PizzaBloc>().add(PizzaDecrementPressed());
-        case MyItem.cake:
-          if (_cake_counter>0) _cake_counter--;
-        case MyItem.tea:
-          if (_tea_counter>0) _tea_counter--;
+      switch(_itemIndex){
+        case 0:
+          if(_pizza>0) _pizza--;
+        case 1:
+          if(_cake>0) _cake--;
+        case 2:
+          if(_soup>0) _soup--;
+        case 3:
+          if(_tea>0) _tea--;
+        default:
+          if(_cookie>0) _cookie--;
       }
     });
   }
@@ -50,21 +54,35 @@ class _BasketScreenState extends State<BasketScreen> {
     setState(() {
       _text = 'Пицца — традиционное итальянское блюдо, изначально в виде круглой дрожжевой лепёшки, выпекаемой с уложенной сверху начинкой из томатного соуса, сыра и зачастую других ингредиентов, таких как мясо, овощи, грибы и прочие продукты';
       _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/pizza.png';
-      chosenItem = MyItem.pizza;
+      _itemIndex = 0;
     });
   }
   void _clickCake() {
     setState(() {
       _text = 'Торт — кондитерское изделие, состоящее из нескольких коржей, пропитанных кремом или джемом. Сверху торт обычно украшают кремом, глазурью или фруктами.';
       _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/cake.png';
-      chosenItem = MyItem.cake;
+      _itemIndex = 1;
+    });
+  }
+  void _clickSoup() {
+    setState(() {
+      _text = 'Суп — жидкое блюдо, в составе которого содержится не менее 50 % жидкости. Жидкую часть супа называют основой, плотную — гарниром.';
+      _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/soup.png';
+      _itemIndex = 2;
     });
   }
   void _clickTea() {
     setState(() {
       _text = 'Чай — напиток, получаемый варкой, завариванием и/или настаиванием листа чайного куста, который предварительно подготавливается специальным образом.';
       _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/coffe.png';
-      chosenItem = MyItem.tea;
+      _itemIndex = 3;
+    });
+  }
+  void _clickCookie() {
+    setState(() {
+      _text = 'Печенье — сухое, запеченное кондитерское изделие. Это лакомство включает в себя несчетное количество видов, вариантов основы и начинки.';
+      _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/cookie.png';
+      _itemIndex = 4;
     });
   }
 
@@ -77,7 +95,7 @@ class _BasketScreenState extends State<BasketScreen> {
         ),
         body: Center(
             child :Container(
-                width: 500,
+                width: 700,
                 margin: const EdgeInsets.all(20),
                 child: Center(
                     child: Column(
@@ -87,16 +105,24 @@ class _BasketScreenState extends State<BasketScreen> {
                               children: [
                                 ElevatedButton(
                                     onPressed: _clickPizza,
-                                    child: Row(children: [const Icon(Icons.local_pizza_outlined), Text("Пицца $_pizzza_counter")])
+                                    child: Row(children: [const Icon(Icons.local_pizza_outlined), Text("Пицца $_pizza")])
                                 ),
                                 ElevatedButton(
                                     onPressed: _clickCake,
-                                    child: Row(children: [const Icon(Icons.cake), Text("Торт $_cake_counter")])
+                                    child: Row(children: [const Icon(Icons.cake), Text("Торт $_cake")])
+                                ),
+                                ElevatedButton(
+                                    onPressed: _clickSoup,
+                                    child: Row(children: [const Icon(Icons.soup_kitchen), Text("Суп $_soup")])
                                 ),
                                 ElevatedButton(
                                     onPressed: _clickTea,
-                                    child: Row(children: [const Icon(Icons.coffee), Text("Чай $_tea_counter")])
-                                )
+                                    child: Row(children: [const Icon(Icons.coffee), Text("Чай $_tea")])
+                                ),
+                                ElevatedButton(
+                                    onPressed: _clickCookie,
+                                    child: Row(children: [const Icon(Icons.cookie), Text("Печенье $_cookie")])
+                                ),
                               ]
                           ),
                           const SizedBox(
@@ -142,16 +168,5 @@ class _BasketScreenState extends State<BasketScreen> {
             )
         )
     );
-  }
-}
-// Вместительность корзины
-abstract class PizzaEvent{}
-class PizzaIncrementPressed extends PizzaEvent {}
-class PizzaDecrementPressed extends PizzaEvent {}
-
-class PizzaBloc extends Bloc<PizzaEvent, int> {
-  PizzaBloc() : super(0) {
-    on<PizzaIncrementPressed>((event, emit) => emit(state + 1));
-    on<PizzaDecrementPressed>((event, emit) => emit(state - 1));
   }
 }
