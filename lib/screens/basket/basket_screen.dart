@@ -8,7 +8,7 @@ class BasketScreen extends StatefulWidget {
 }
 
 class _BasketScreenState extends State<BasketScreen> {
-  int _itemIndex = 0; // Пицца, Торт, Суп, Чай, Морс
+  int _itemIndex = 0; // Пицца, Торт, Суп, Чай, Печенье
   int _pizza = 0;
   int _cake = 0;
   int _soup = 0;
@@ -74,7 +74,7 @@ class _BasketScreenState extends State<BasketScreen> {
   void _clickTea() {
     setState(() {
       _text = 'Чай — напиток, получаемый варкой, завариванием и/или настаиванием листа чайного куста, который предварительно подготавливается специальным образом.';
-      _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/coffe.png';
+      _url = 'https://raw.githubusercontent.com/BerestaCoder/Crossplatform-7/main/img/tea.png';
       _itemIndex = 3;
     });
   }
